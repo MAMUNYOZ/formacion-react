@@ -1,9 +1,10 @@
 import React from 'react'
+import { ProductList } from '../products/ProductList'
 
 export const OffersScreen = () => {
     return (
-        <div>
-            <h1>Ofertas</h1>
-        </div>
+
+            <ProductList offer = 'true' title="Nuestras Ofertas" />
+            
     )
 }

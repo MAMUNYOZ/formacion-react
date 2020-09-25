@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-export default function BannerScreen() {
+export const BannerScreen = () =>{
   return (
     <div className="jumbotron jumbotron-fluid">
       <div className="container">
@@ -9,7 +9,7 @@ export default function BannerScreen() {
         <p className="lead">
           Consigue 10 € de regalo para probar tus primeros vinos
         </p>
-        <a class="btn btn-primary btn-lg" href="/login" role="button">
+        <a className="btn btn-danger btn-lg" href="/registrarse" role="button">
           Conseguir
         </a>
       </div>

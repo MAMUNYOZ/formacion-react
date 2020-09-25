@@ -1,0 +1,17 @@
+#navbarMenu a {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: transparent;
+  font-size: 1.2rem;
+}
+.nav-link {
+  display: inline-table;
+}
+.sombra {
+    -webkit-box-shadow: 0px 7px 13px -7px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 7px 13px -7px rgba(0,0,0,0.75);
+    box-shadow: 0px 7px 13px -7px rgba(0,0,0,0.75);
+}
+.icons{
+  font-size: 2em;
+}
