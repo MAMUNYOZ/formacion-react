@@ -3,20 +3,39 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingBasket, faDollyFlatbed, faCoins, faGift } from "@fortawesome/free-solid-svg-icons";
 import { useParams, Redirect } from "react-router-dom";
 import { getProducstById } from "../selectors/getProductById";
+import { purchaseAddNew, purchaseUpdateTotal } from "../../actions/shopping";
+import { updateProductById } from "../selectors/updateProductById";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export const ProductScreen = () => {
   const { productId } = useParams();
+  const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
 
   const product = getProducstById(products, productId);
+
+  const { productsShopping } = useSelector((state) => state.shopping);
 
   if (!product) {
     return <Redirect to="/" />;
   }
 
   const { id, name, description, subdescription, price } = product;
+
+  const onSelectProduct = (e) => {
+    const product = e.currentTarget.dataset.product;
+
+    const productFind = getProducstById(productsShopping, JSON.parse(product).id);
+
+    if (!productFind) {
+      dispatch(purchaseAddNew(product));
+    } else {
+      const productUpdate = updateProductById(productsShopping, JSON.parse(product).id, 1);
+      dispatch(purchaseUpdateTotal(JSON.stringify(productUpdate)));
+    }
+  };
+
 
   return (
     <div className="container-fluid">
@@ -38,10 +57,14 @@ export const ProductScreen = () => {
                 <p className=" price">Precio: {price} €</p>
               </div>
               <div className="col-md-6 text-center">
-                <button type="button" className="btn btn-primary mr-3">
+              <button
+              type="button"
+              className="btn btn-primary mr-3"
+              onClick={onSelectProduct}
+              data-product={JSON.stringify(product)}
+            >
                   <FontAwesomeIcon icon={faShoppingBasket} className="price" />
-                  <span className="price"> Añadir</span>
-                  <span className="badge badge-light ml-2 price">0</span>
+                  <span className="price"> Añadir</span>                  
                 </button>
               </div>
             </div>

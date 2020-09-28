@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
 
 export const BannerScreen = () =>{
@@ -9,9 +10,7 @@ export const BannerScreen = () =>{
         <p className="lead">
           Consigue 10 € de regalo para probar tus primeros vinos
         </p>
-        <a className="btn btn-danger btn-lg" href="/registrarse" role="button">
-          Conseguir
-        </a>
+        <Link className="btn btn-danger btn-lg" exact="true" to="/registrarse"> Conseguir </Link>
       </div>
     </div>
   );

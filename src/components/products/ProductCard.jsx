@@ -15,20 +15,19 @@ const regex = /(<([^>]+)>)/gi;
 
 export const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.shopping);
+  const { productsShopping } = useSelector((state) => state.shopping);
 
   const onSelectProduct = (e) => {
     const product = e.currentTarget.dataset.product;
 
-    const productFind = getProducstById(products, JSON.parse(product).id);
+    const productFind = getProducstById(productsShopping, JSON.parse(product).id);
 
     if (!productFind) {
       dispatch(purchaseAddNew(product));
     } else {
-      const productUpdate = updateProductById(products, JSON.parse(product).id);
+      const productUpdate = updateProductById(productsShopping, JSON.parse(product).id, 1);
       dispatch(purchaseUpdateTotal(JSON.stringify(productUpdate)));
     }
-    console.log(localStorage.getItem('shopping'));
   };
 
   return (

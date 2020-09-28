@@ -7,7 +7,7 @@ import { removeError, setError } from "../../actions/ui";
 
 import validator from "validator";
 
-export const LoginScreen = () => {
+export const LoginScreen = ({ history}) => {
   const dispatch = useDispatch();
   const { msgError } = useSelector((state) => state.ui);
 
@@ -22,6 +22,7 @@ export const LoginScreen = () => {
     e.preventDefault();
     if (isFormValid()) {
       dispatch( startLogin(email, password) );
+      history.replace('/');
     }
   };
 

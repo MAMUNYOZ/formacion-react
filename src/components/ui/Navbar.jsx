@@ -15,11 +15,11 @@ import { startLogout } from "../../actions/auth";
 export const Navbar = () => {
   const dispatch = useDispatch();
   const { name } = useSelector((state) => state.auth);
-  const { products } = useSelector((state) => state.shopping);
+  const { productsShopping } = useSelector((state) => state.shopping);
 
   // para contabilizar los productos de la cesta
   let total = 0;
-  products.map((product) => (
+  productsShopping.map((product) => (
     total = total + product.total
   ))
   
@@ -49,7 +49,11 @@ export const Navbar = () => {
                 Productos
               </NavLink>
             </li>
-          </ul>
+            <li className="nav-item">
+              <NavLink className="nav-item nav-link" exact to="compra">
+                Compra
+              </NavLink>
+            </li>          </ul>
         </div>
       </div>
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark sombra">
