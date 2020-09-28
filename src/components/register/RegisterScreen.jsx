@@ -1,10 +1,77 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFly } from "@fortawesome/free-brands-svg-icons";
+import validator from "validator";
 
+import { useForm } from "../../hooks/useForm";
+import { removeError, setError } from "../../actions/ui";
+import { startRegister } from "../../actions/auth";
 import "./style.css";
 
+
 export const RegisterScreen = () => {
+  const dispatch = useDispatch();
+  const { msgError } = useSelector((state) => state.ui);
+
+  const [formValues, handleInputChange] = useForm({
+    name: "Nombre",
+    surnames: "Apellidos",
+    email: "uno@dos.es",
+    password: "una",
+    address: "Dirección",
+    postalCode: "28001",
+    telephone: "123456789",
+  });
+
+  const {
+    name,
+    surnames,
+    email,
+    password,
+    address,
+    postalCode,
+    telephone,
+  } = formValues;
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+
+    if (isFormValid()) {
+      dispatch( startRegister (name, surnames, email, password, address, postalCode, telephone ) );
+    }
+  };
+
+  const isFormValid = () => {
+    if (validator.isEmpty(name)) {
+      dispatch(setError("Nombre obligatorio"));
+      return false;
+    } else if (validator.isEmpty(surnames)) {
+      dispatch(setError("Apellido obligatorio"));
+      return false;
+    } else if (!validator.isEmail(email)) {
+      dispatch(setError("Email incorrecto"));
+      return false;
+    } else if (validator.isEmpty(password) || password.length < 6) {
+      dispatch(
+        setError("El tamaño de la clave tiene que ser mayor a 5 caracteres")
+      );
+      return false;
+    } else if (validator.isEmpty(address)) {
+      dispatch(setError("La dirección es obligatoria"));
+      return false;
+    } else if (validator.isEmpty(postalCode)) {
+      dispatch(setError("El código postal es obligatorio"));
+      return false;
+    } else if (validator.isEmpty(telephone)) {
+      dispatch(setError("El teléfono es obligatorio"));
+      return false;
+    }
+
+    dispatch(removeError());
+    return true;
+  };
+
   return (
     <div className="container-fluid register">
       <div className="row  pb-5">
@@ -14,48 +81,57 @@ export const RegisterScreen = () => {
           <p>Haz tu registro y consigue tus primeros 10 €</p>
         </div>
         <div className="col-md-9 register-right">
-          
+          <form onSubmit={handleRegister}>
+            {
+              msgError &&
+              (
+              <div className="alert alert-danger text-center" role="alert">
+               { msgError }
+              </div>
+              )
+            }
+
             <h3 className="register-heading">Formulario de Registro</h3>
             <div className="row register-form">
               <div className="col-md-6">
                 <div className="form-group">
                   <input
                     type="text"
+                    name="name"
                     className="form-control"
                     placeholder="Nombre *"
-                    value=""
+                    value={name}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="form-group">
                   <input
                     type="text"
+                    name="surnames"
                     className="form-control"
                     placeholder="Apellidos *"
-                    value=""
+                    value={surnames}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="form-group">
                   <input
                     type="email"
+                    name="email"
                     className="form-control"
                     placeholder="Email *"
-                    value=""
+                    value={email}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="form-group">
                   <input
                     type="password"
+                    name="password"
                     className="form-control"
                     placeholder="Password *"
-                    value=""
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Confirma Password *"
-                    value=""
+                    value={password}
+                    onChange={handleInputChange}
                   />
                 </div>
               </div>
@@ -63,110 +139,48 @@ export const RegisterScreen = () => {
                 <div className="form-group">
                   <input
                     type="text"
+                    name="address"
                     className="form-control"
                     placeholder="Dirección *"
-                    value=""
+                    value={address}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="form-group">
                   <input
                     type="text"
+                    name="postalCode"
                     className="form-control"
                     placeholder="Código Postal *"
-                    value=""
+                    value={postalCode}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control"
-                    placeholder="Población *"
-                    value=""
-                  />
-                </div>
-                <div className="form-group">
-                  <select class="form-control">
-                    <option class="hidden" selected disabled>
-                      Selecciona tu provincia
-                    </option>
-                    <option value="alava">Álava</option>
-                    <option value="albacete">Albacete</option>
-                    <option value="alicante">Alicante/Alacant</option>
-                    <option value="almeria">Almería</option>
-                    <option value="asturias">Asturias</option>
-                    <option value="avila">Ávila</option>
-                    <option value="badajoz">Badajoz</option>
-                    <option value="barcelona">Barcelona</option>
-                    <option value="burgos">Burgos</option>
-                    <option value="caceres">Cáceres</option>
-                    <option value="cadiz">Cádiz</option>
-                    <option value="cantabria">Cantabria</option>
-                    <option value="castellon">Castellón/Castelló</option>
-                    <option value="ceuta">Ceuta</option>
-                    <option value="ciudadreal">Ciudad Real</option>
-                    <option value="cordoba">Córdoba</option>
-                    <option value="cuenca">Cuenca</option>
-                    <option value="girona">Girona</option>
-                    <option value="laspalmas">Las Palmas</option>
-                    <option value="granada">Granada</option>
-                    <option value="guadalajara">Guadalajara</option>
-                    <option value="guipuzcoa">Guipúzcoa</option>
-                    <option value="huelva">Huelva</option>
-                    <option value="huesca">Huesca</option>
-                    <option value="illesbalears">Illes Balears</option>
-                    <option value="jaen">Jaén</option>
-                    <option value="acoruña">A Coruña</option>
-                    <option value="larioja">La Rioja</option>
-                    <option value="leon">León</option>
-                    <option value="lleida">Lleida</option>
-                    <option value="lugo">Lugo</option>
-                    <option value="madrid">Madrid</option>
-                    <option value="malaga">Málaga</option>
-                    <option value="melilla">Melilla</option>
-                    <option value="murcia">Murcia</option>
-                    <option value="navarra">Navarra</option>
-                    <option value="ourense">Ourense</option>
-                    <option value="palencia">Palencia</option>
-                    <option value="pontevedra">Pontevedra</option>
-                    <option value="salamanca">Salamanca</option>
-                    <option value="segovia">Segovia</option>
-                    <option value="sevilla">Sevilla</option>
-                    <option value="soria">Soria</option>
-                    <option value="tarragona">Tarragona</option>
-                    <option value="santacruztenerife">
-                      Santa Cruz de Tenerife
-                    </option>
-                    <option value="teruel">Teruel</option>
-                    <option value="toledo">Toledo</option>
-                    <option value="valencia">Valencia/Valéncia</option>
-                    <option value="valladolid">Valladolid</option>
-                    <option value="vizcaya">Vizcaya</option>
-                    <option value="zamora">Zamora</option>
-                    <option value="zaragoza">Zaragoza</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    minlength="10"
-                    maxlength="10"
+                    name="telephone"
+                    minLength="10"
+                    maxLength="10"
                     name="telefono"
                     className="form-control"
                     placeholder="Teléfono *"
-                    value=""
+                    value={telephone}
+                    onChange={handleInputChange}
                   />
-                </div>                
-              </div>              
-            </div>            
+                </div>
+              </div>
+            </div>
             <div className="row">
-                <div className="col-12 text-center">
+              <div className="col-12 text-center">
                 <input
                   type="submit"
                   className="btn btn-danger btn-lg"
                   value="Registrarse"
                 />
-                </div>
+              </div>
             </div>
+          </form>
         </div>
       </div>
     </div>

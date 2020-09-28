@@ -15,15 +15,15 @@ export const FooterScreen = () => {
     <footer className="container-fluid bg-dark">
       <div className="container pt-5 pb-5">
         <div className="row">
-          <div className="col-sm-12 col-md-3">
+          <div className="col-md-4 col-lg-3">
             <img src="./assets/imgs/logo.png" alt="logotipo" className="pl-3" />
           </div>
-          <div className="col-sm-12 col-md-9 border-left">
+          <div className="col-md-8 col-lg-9 border-left">
             <h4 className="text-white pt-2">Tu tienda de vinos</h4>
           </div>
         </div>
         <div className="row">
-          <div className="col-6">
+          <div className="col-md-6">
             <nav className="nav mt-5">
               <Link className="nav-link active" to="/">
                 Inicio
@@ -36,7 +36,7 @@ export const FooterScreen = () => {
               </Link>
             </nav>
           </div>
-          <div className="col-6 text-right">
+          <div className="col-md-6 text-right">
             <FontAwesomeIcon
               icon={faFacebookSquare}
               style={{ fontSize: "2em" }}

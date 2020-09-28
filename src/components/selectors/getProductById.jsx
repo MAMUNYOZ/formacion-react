@@ -1,6 +1,5 @@
-import { products } from '../../data/products';
 
-export const getProducstById = ( id ) => {
+export const getProducstById = ( productsList, id ) => {
      
-    return products.find( product => product.id === id );
+    return productsList.find( product => product.id === id );
 } 

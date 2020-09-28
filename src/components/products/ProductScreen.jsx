@@ -4,16 +4,19 @@ import { faShoppingBasket, faDollyFlatbed, faCoins, faGift } from "@fortawesome/
 import { useParams, Redirect } from "react-router-dom";
 import { getProducstById } from "../selectors/getProductById";
 
+import { useSelector } from "react-redux";
+
 export const ProductScreen = () => {
   const { productId } = useParams();
+  const { products } = useSelector((state) => state.products);
 
-  const product = getProducstById(productId);
+  const product = getProducstById(products, productId);
 
   if (!product) {
     return <Redirect to="/" />;
   }
 
-  const { id, name, offer, description, subdescription, price } = product;
+  const { id, name, description, subdescription, price } = product;
 
   return (
     <div className="container-fluid">
@@ -28,7 +31,7 @@ export const ProductScreen = () => {
           </div>
           <div className="col-md-9">
             <h3 className="mb-4">{name}</h3>
-            <h4 className="mb-4">{subdescription}</h4>
+            <h4 className="mb-4">{subdescription}<br/><small className="text-muted">{ id } </small></h4>            
             <h5 className="mb-4">{description} </h5>
             <div className="row">
               <div className="col-md-6 text-center pt-2">

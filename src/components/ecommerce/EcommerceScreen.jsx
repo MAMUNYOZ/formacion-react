@@ -4,6 +4,7 @@ import { ProductList } from "../products/ProductList";
 import "./style.css";
 
 export const EcommerceScreen = () => {
+
   return (
     <>
         <SearchScreen/>

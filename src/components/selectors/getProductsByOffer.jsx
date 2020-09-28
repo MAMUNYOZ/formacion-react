@@ -1,10 +1,9 @@
-import { products } from '../../data/products';
 
-export const getProducstByOffer = ( offer, amount ) => {
+export const getProducstByOffer = ( productsList, offer, amount ) => {
      
     if (!offer) {
-        return products.slice(0, amount);
+        return productsList.slice(0, amount);
     } else {
-        return products.filter( product => product.offer === offer ).slice(0, amount);
+        return productsList.filter( product => product.offer === offer ).slice(0, amount);
     }
 } 

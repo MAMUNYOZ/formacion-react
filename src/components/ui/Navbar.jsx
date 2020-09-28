@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,8 +9,25 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import "./style.css";
+import { useSelector, useDispatch } from "react-redux";
+import { startLogout } from "../../actions/auth";
 
 export const Navbar = () => {
+  const dispatch = useDispatch();
+  const { name } = useSelector((state) => state.auth);
+  const { products } = useSelector((state) => state.shopping);
+
+  // para contabilizar los productos de la cesta
+  let total = 0;
+  products.map((product) => (
+    total = total + product.total
+  ))
+  
+
+  const handleLogout = () => {
+    dispatch(startLogout());
+  };
+
   return (
     <>
       <div className="collapse" id="navbarMenu">
@@ -17,38 +35,17 @@ export const Navbar = () => {
           <h5 className="text-white h3">Menú de navegación</h5>
           <ul className="nav flex-column">
             <li className="nav-item">
-              <NavLink
-                className="nav-item nav-link"
-                data-toggle="collapse"
-                data-target="#navbarMenu"
-                aria-controls="navbarMenu"
-                exact
-                to="/"
-              >
+              <NavLink className="nav-item nav-link" exact to="/">
                 Inicio
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink
-                className="nav-item nav-link"
-                data-toggle="collapse"
-                data-target="#navbarMenu"
-                aria-controls="navbarMenu"
-                exact
-                to="/ofertas"
-              >
+              <NavLink className="nav-item nav-link" exact to="ofertas">
                 Ofertas
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink
-                className="nav-item nav-link"
-                data-toggle="collapse"
-                data-target="#navbarMenu"
-                aria-controls="navbarMenu"
-                exact
-                to="/productos"
-              >
+              <NavLink className="nav-item nav-link" exact to="productos">
                 Productos
               </NavLink>
             </li>
@@ -72,23 +69,40 @@ export const Navbar = () => {
         </Link>
 
         <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
-          <ul className="navbar-nav ml-auto">            
+          <ul className="navbar-nav ml-auto">
             <li className="pr-3">
-              <NavLink className="nav-item nav-link" exact to="/">
+              <NavLink className="nav-item nav-link" exact to="/compra">
                 <FontAwesomeIcon icon={faShoppingBasket} className="icons" />{" "}
-                <div className="badge badge-danger">0 prod.</div>
+                <div className="badge badge-danger">{ total } prod.</div>
               </NavLink>
             </li>
-            <li className="pt-2">
-              <FontAwesomeIcon className="icons" icon={faUserCircle} />{" "}
-              <NavLink className="nav-item nav-link" exact to="/login">
-                Login
-              </NavLink>{" "}
-              <span className="text-white">/</span>{" "}
-              <NavLink className="nav-item nav-link" exact to="/registrarse">
-                Registrarse
-              </NavLink>
-            </li>
+            {name ? (
+              <li className="pt-2">
+                <FontAwesomeIcon className="icons" icon={faUserCircle} />{" "}
+                <NavLink className="nav-item nav-link" exact to="#">
+                  {name} <span className="text-white">/</span>{" "}
+                </NavLink>
+                <NavLink
+                  className="nav-item nav-link"
+                  exact
+                  to="#"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </NavLink>
+              </li>
+            ) : (
+              <li className="pt-2">
+                <FontAwesomeIcon className="icons" icon={faUserCircle} />{" "}
+                <NavLink className="nav-item nav-link" exact to="/login">
+                  Login
+                </NavLink>{" "}
+                <span className="text-white">/</span>{" "}
+                <NavLink className="nav-item nav-link" exact to="/registrarse">
+                  Registrarse
+                </NavLink>
+              </li>
+            )}
           </ul>
         </div>
       </nav>
