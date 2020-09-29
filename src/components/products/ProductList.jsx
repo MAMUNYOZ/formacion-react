@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { getProducstByOffer } from "../selectors/getProductsByOffer";
 import { ProductCard } from "./ProductCard";
 
@@ -8,12 +8,12 @@ export const ProductList = ({ offer, amount, title }) => {
 
   const { products } = useSelector((state) => state.products);
 
-   const productsList = getProducstByOffer(products, offer, amount, title);
+  const productsList = useMemo(() => getProducstByOffer(products, offer, amount, title), [ products, offer, amount, title ]);
 
   return (
-    <div className="container">
+    <div className="container pt-4">
       <h2>{title}</h2>
-      <div className="card-columns mt-5 mb-5">
+      <div className="card-columns mt-5 mb-5 animate__animated animate__fadeIn">
         {productsList.map((product) => (
           <ProductCard key={product.id} product={product}/>
         ))}

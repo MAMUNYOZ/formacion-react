@@ -15,13 +15,13 @@ export const RegisterScreen = () => {
   const { msgError } = useSelector((state) => state.ui);
 
   const [formValues, handleInputChange] = useForm({
-    name: "Nombre",
-    surnames: "Apellidos",
-    email: "uno@dos.es",
-    password: "una",
-    address: "Dirección",
-    postalCode: "28001",
-    telephone: "123456789",
+    name: "",
+    surnames: "",
+    email: "",
+    password: "",
+    address: "",
+    postalCode: "",
+    telephone: "",
   });
 
   const {
@@ -36,13 +36,14 @@ export const RegisterScreen = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    dispatch(removeError());
 
     if (isFormValid()) {
       dispatch( startRegister (name, surnames, email, password, address, postalCode, telephone ) );
     }
   };
 
-  const isFormValid = () => {
+  const isFormValid = () => {    
     if (validator.isEmpty(name)) {
       dispatch(setError("Nombre obligatorio"));
       return false;
@@ -73,7 +74,7 @@ export const RegisterScreen = () => {
   };
 
   return (
-    <div className="container-fluid register">
+    <div className="container-fluid register animate__animated animate__fadeIn">
       <div className="row  pb-5">
         <div className="col-md-3 register-left">
           <FontAwesomeIcon icon={faFly} style={{ fontSize: "8em" }} />
@@ -85,7 +86,7 @@ export const RegisterScreen = () => {
             {
               msgError &&
               (
-              <div className="alert alert-danger text-center" role="alert">
+              <div className="alert alert-danger text-center mt-4" role="alert">
                { msgError }
               </div>
               )

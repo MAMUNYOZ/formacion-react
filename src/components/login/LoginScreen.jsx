@@ -7,7 +7,7 @@ import { removeError, setError } from "../../actions/ui";
 
 import validator from "validator";
 
-export const LoginScreen = ({ history}) => {
+export const LoginScreen = ({ history }) => {
   const dispatch = useDispatch();
   const { msgError } = useSelector((state) => state.ui);
 
@@ -39,11 +39,11 @@ export const LoginScreen = ({ history}) => {
   };
 
   return (
-    <div className="container mt-5 mb-5 text-center">
+    <div className="container mt-5 mb-5 text-center animate__animated animate__fadeIn">
       <h3> Formulario de Acceso</h3>
       <form onSubmit={handleLogin}>
         {msgError && (
-          <div className="alert alert-danger text-center" role="alert">
+          <div className="alert alert-danger text-center mt-4" role="alert">
             {msgError}
           </div>
         )}

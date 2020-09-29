@@ -11,10 +11,13 @@ import { ProductsScreen } from "../components/products/ProductsScreen";
 import { ProductScreen } from "../components/products/ProductScreen";
 import { FooterScreen } from "../components/footer/FooterScreen";
 import { ShoppingScreen } from "../components/shopping/ShoppingScreen";
+import { SearcherScreen } from "../components/searcher/SearcherScreen";
+
 
 import { startChecking } from '../actions/auth';
 import { PrivateRoute } from './PrivateRoute';
 import { productsStartLoading } from "../actions/products";
+
 
 
 export const AppRouter = () => {
@@ -43,6 +46,7 @@ export const AppRouter = () => {
           <Route exact path="/productos" component={ProductsScreen} />
           <Route exact path="/producto/:productId" component={ProductScreen} />
           <Route exact path="/ofertas" component={OffersScreen} />
+          <Route exact path="/buscar" component={SearcherScreen} />
           <PrivateRoute
             exact
             path="/compra"

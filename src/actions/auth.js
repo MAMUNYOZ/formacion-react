@@ -19,7 +19,12 @@ export const startLogin = (email, password) => {
         }) )
       }
     }
-}
+};
+
+const login = ( user ) => ({
+  type: types.authLogin,
+  payload: user
+});
 
 export const startRegister = (  name, surnames, email, password, address, postalCode, telephone ) => {
   return ( dispatch ) =>{
@@ -28,7 +33,7 @@ export const startRegister = (  name, surnames, email, password, address, postal
     )
 
   }
-}
+};
 
 export const startChecking = () => {
   return async ( dispatch ) => {
@@ -43,14 +48,9 @@ export const startChecking = () => {
       dispatch( checkingFinish() );
     } 
   }
-}
+};
 
 const checkingFinish = () =>({ type: types.authCheckingFinish });
-
-const login = ( user ) => ({
-  type: types.authLogin,
-  payload: user
-});
 
 export const startLogout = () => {
   return ( dispatch ) =>{

@@ -17,6 +17,8 @@ export const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const { productsShopping } = useSelector((state) => state.shopping);
 
+  const {id, name, subdescription, description, price} = product;
+
   const onSelectProduct = (e) => {
     const product = e.currentTarget.dataset.product;
 
@@ -35,7 +37,7 @@ export const ProductCard = ({ product }) => {
       <div className="row no-gutters">
         <div className="col-md-4">
           <img
-            src={`./assets/imgs/products/product-${product.id}.jpg`}
+            src={`./assets/imgs/products/product-${id}.jpg`}
             className="card-img"
             alt={product.name}
           />
@@ -43,16 +45,16 @@ export const ProductCard = ({ product }) => {
         <div className="col-md-8 text-left">
           <div className="card-body">
             <h5 className="card-title">
-              <Link to={`./producto/${product.id}`} className="dark-link">
+              <Link to={`./producto/${id}`} className="dark-link">
                 {" "}
-                {product.name}{" "}
+                {name}{" "}
               </Link>
             </h5>
             <p className="card-text">
-              <small className="text-muted"> {product.subdescription} </small>
+              <small className="text-muted"> {subdescription} </small>
             </p>
             <p className="card-text">
-              {product.description.replace(regex, "").substr(0, 80)}...
+              {description.replace(regex, "").substr(0, 80)}...
             </p>
           </div>
         </div>
@@ -60,7 +62,7 @@ export const ProductCard = ({ product }) => {
       <div className="card-footer">
         <div className="row">
           <div className="col-md-5">
-            <h5 className="text-left"> {product.price} €</h5>
+            <h5 className="text-left"> {price} €</h5>
           </div>
           <div className="col-md-7 text-right">
             <button

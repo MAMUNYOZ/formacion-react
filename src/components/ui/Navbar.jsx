@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,12 +17,13 @@ export const Navbar = () => {
   const { name } = useSelector((state) => state.auth);
   const { productsShopping } = useSelector((state) => state.shopping);
 
+  //para el control del despliegue del menu de navegación
+  const [isNavCollapsed, setIsNavCollapsed] = useState(true);
+  const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
+
   // para contabilizar los productos de la cesta
   let total = 0;
-  productsShopping.map((product) => (
-    total = total + product.total
-  ))
-  
+  productsShopping.map((product) => (total = total + product.total));
 
   const handleLogout = () => {
     dispatch(startLogout());
@@ -30,30 +31,59 @@ export const Navbar = () => {
 
   return (
     <>
-      <div className="collapse" id="navbarMenu">
+      <div
+        className={`${isNavCollapsed ? "collapse" : ""} navbar-collapse`}
+        id="navbarMenu"
+      >
         <div className="bg-dark p-4">
           <h5 className="text-white h3">Menú de navegación</h5>
           <ul className="nav flex-column">
             <li className="nav-item">
-              <NavLink className="nav-item nav-link" exact to="/">
+              <NavLink
+                className="nav-item nav-link"
+                to="/"
+                onClick={handleNavCollapse}
+              >
                 Inicio
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-item nav-link" exact to="ofertas">
+              <NavLink
+                className="nav-item nav-link"
+                to="ofertas"
+                onClick={handleNavCollapse}
+              >
                 Ofertas
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-item nav-link" exact to="productos">
+              <NavLink
+                className="nav-item nav-link"
+                to="productos"
+                onClick={handleNavCollapse}
+              >
                 Productos
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-item nav-link" exact to="compra">
+              <NavLink
+                className="nav-item nav-link"
+                to="buscar"
+                onClick={handleNavCollapse}
+              >
+                Buscar producto
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className="nav-item nav-link"
+                to="compra"
+                onClick={handleNavCollapse}
+              >
                 Compra
               </NavLink>
-            </li>          </ul>
+            </li>
+          </ul>
         </div>
       </div>
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark sombra">
@@ -62,9 +92,10 @@ export const Navbar = () => {
           data-toggle="collapse"
           data-target="#navbarMenu"
           aria-controls="navbarMenu"
-          aria-expanded="false"
+          aria-expanded={!isNavCollapsed ? true : false}
           aria-label="Toggle navigation"
           className="btn btn-outline-light"
+          onClick={handleNavCollapse}
         >
           <FontAwesomeIcon icon={faBars} className="icons" />
         </button>
@@ -77,7 +108,7 @@ export const Navbar = () => {
             <li className="pr-3">
               <NavLink className="nav-item nav-link" exact to="/compra">
                 <FontAwesomeIcon icon={faShoppingBasket} className="icons" />{" "}
-                <div className="badge badge-danger">{ total } prod.</div>
+                <div className="badge badge-danger">{total} prod.</div>
               </NavLink>
             </li>
             {name ? (

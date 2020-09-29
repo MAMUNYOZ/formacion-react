@@ -14,7 +14,10 @@ export const types = {
     purchaseStartAddNew: '[purchase] Start add new product',
     purchaseAddNew: '[purchase] Add new product',
     purchaseUpdateTotal: 'purchase] Product updated',
-    purchaseDeleted: '[purchase] Product deleted',
+
+    searchesStart: '[searcher] Start request',
+    searcherSuccess: '[searcher] Success request',
+    searcherFailure: '[searcher] Failure request'
 
 
 

@@ -10,6 +10,8 @@ export const ShoppingCartProduct = ({ product }) => {
     const dispatch = useDispatch();
     const { productsShopping } = useSelector((state) => state.shopping);
 
+    const {id, name, price, total} = product;
+
     const addOne = (e) => {
         const productId = e.currentTarget.dataset.key;    
 
@@ -30,20 +32,20 @@ export const ShoppingCartProduct = ({ product }) => {
             <div className="row">
               <div className="col-md-1">
                 <img
-                  src={`./assets/imgs/products/product-${product.id}.jpg`}
+                  src={`./assets/imgs/products/product-${id}.jpg`}
                   className="w-50"
-                  alt={product.name}
+                  alt={name}
                 />
               </div>
               <div className="col-md-4 pt-3">
-                <h4>{product.name}</h4>
+                <h4>{name}</h4>
               </div>
 
               <div className="col-md-1 pt-3 text-center">
-                <h4>{product.total}</h4>
+                <h4>{total}</h4>
               </div>
               <div className="col-md-2 pt-3 text-center">
-                <h4>{product.price} € <small>(p/u)</small></h4>
+                <h4>{price} € <small>(p/u)</small></h4>
               </div>
               <div className="col-md-2 pt-3 text-center">
                 {" "}
@@ -51,18 +53,18 @@ export const ShoppingCartProduct = ({ product }) => {
                     type="button"
                     className="btn btn-primary mr-3"
                     onClick={addOne}
-                    data-key={product.id}
+                    data-key={id}
                     >+</button>  <button
                     type="button"
                     className="btn btn-primary mr-3"
                     onClick={removeOne}
-                    data-key={product.id}
+                    data-key={id}
                     >-</button></h4>
               </div>
               <div className="col-md-2 pt-3 text-right">
                 <h4>
-                  {(parseFloat(product.price.replace(",", ".")) *
-                    parseInt(product.total)).toFixed(2)}
+                  {(parseFloat(price.replace(",", ".")) *
+                    parseInt(total)).toFixed(2)}
                   {" €"}
                 </h4>
               </div>

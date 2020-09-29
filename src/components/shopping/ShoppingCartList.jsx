@@ -14,7 +14,7 @@ export const ShoppingCartList = ({ title }) => {
   });
 
   return (
-    <div className="container pb-4">
+    <div className="container pb-4 animate__animated animate__fadeIn">
       <h2 className="text-center">{title}</h2>
       <h3 className="pt-5">Estos son los productos que has comprado:</h3>
       <ul className="list-group pt-4">
