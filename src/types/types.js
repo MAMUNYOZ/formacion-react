@@ -15,11 +15,5 @@ export const types = {
     purchaseAddNew: '[purchase] Add new product',
     purchaseUpdateTotal: 'purchase] Product updated',
 
-    searchesStart: '[searcher] Start request',
-    searcherSuccess: '[searcher] Success request',
-    searcherFailure: '[searcher] Failure request'
-
-
-
 
 }
