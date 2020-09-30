@@ -77,21 +77,67 @@ export const Navbar = () => {
             <li className="nav-item">
               <NavLink
                 className="nav-item nav-link"
+                to="favoritos"
+                onClick={handleNavCollapse}
+              >
+                Favoritos
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className="nav-item nav-link"
                 to="compra"
                 onClick={handleNavCollapse}
               >
                 Compra
               </NavLink>
-            </li>
+            </li>           
+            {name ? (
+              <li className="pt-2 d-block d-sm-block d-md-none">
+                <NavLink
+                  className="nav-item nav-link"
+                  exact
+                  to="#"
+                  onClick={handleNavCollapse}
+                >
+                  {name} <span className="text-white">/</span>{" "}
+                </NavLink>
+                <NavLink
+                  className="nav-item nav-link"
+                  exact
+                  to="#"
+                  onClick={(handleNavCollapse, handleLogout)}
+                >
+                  Logout
+                </NavLink>
+              </li>
+            ) : (
+              <li className="pt-2 d-block d-sm-block d-md-none">
+                <NavLink
+                  className="nav-item nav-link"
+                  exact
+                  to="/login"
+                  onClick={handleNavCollapse}
+                >
+                  Login
+                </NavLink>{" "}
+                <span className="text-white">/</span>{" "}
+                <NavLink
+                  className="nav-item nav-link"
+                  exact
+                  to="/registrarse"
+                  onClick={handleNavCollapse}
+                >
+                  Registrarse
+                </NavLink>
+              </li>
+            )}
           </ul>
         </div>
       </div>
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark sombra">
         <button
           type="button"
-          data-toggle="collapse"
-          data-target="#navbarMenu"
-          aria-controls="navbarMenu"
           aria-expanded={!isNavCollapsed ? true : false}
           aria-label="Toggle navigation"
           className="btn btn-outline-light"
@@ -112,7 +158,7 @@ export const Navbar = () => {
               </NavLink>
             </li>
             {name ? (
-              <li className="pt-2">
+              <li className="pt-2 d-none d-sm-none d-md-block">
                 <FontAwesomeIcon className="icons" icon={faUserCircle} />{" "}
                 <NavLink className="nav-item nav-link" exact to="#">
                   {name} <span className="text-white">/</span>{" "}
@@ -127,7 +173,7 @@ export const Navbar = () => {
                 </NavLink>
               </li>
             ) : (
-              <li className="pt-2">
+              <li className="pt-2 d-none d-sm-none d-md-block">
                 <FontAwesomeIcon className="icons" icon={faUserCircle} />{" "}
                 <NavLink className="nav-item nav-link" exact to="/login">
                   Login

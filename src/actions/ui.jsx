@@ -1,8 +1,9 @@
 import { types } from '../types/types';
 
-export const setError = ( err ) => ({
+export const setError = ( err, kindError ) => ({
     type: types.uiSetError,
-    payload: err
+    payload: err,
+    kind: kindError  // Para determinar el tipo de error ( 0 si es de registro, 1 si es de login)
 });
 
 export const removeError = ( err ) => ({

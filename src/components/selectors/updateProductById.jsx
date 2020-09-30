@@ -9,6 +9,8 @@ export const updateProductById = ( productsList, id, value ) => {
           } else return product;
         } else return product;
       });
+      
+      localStorage.setItem("purchase", JSON.stringify(productsList));
 
     return productsList;
 } 

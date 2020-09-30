@@ -12,7 +12,7 @@ import { ProductScreen } from "../components/products/ProductScreen";
 import { FooterScreen } from "../components/footer/FooterScreen";
 import { ShoppingScreen } from "../components/shopping/ShoppingScreen";
 import { SearcherScreen } from "../components/searcher/SearcherScreen";
-
+import { FavoritesScreen } from "../components/favorites/FavoritesScreen";
 
 import { startChecking } from '../actions/auth';
 import { PrivateRoute } from './PrivateRoute';
@@ -47,6 +47,7 @@ export const AppRouter = () => {
           <Route exact path="/producto/:productId" component={ProductScreen} />
           <Route exact path="/ofertas" component={OffersScreen} />
           <Route exact path="/buscar" component={SearcherScreen} />
+          <Route exact path="/favoritos" component={FavoritesScreen} />
           <PrivateRoute
             exact
             path="/compra"

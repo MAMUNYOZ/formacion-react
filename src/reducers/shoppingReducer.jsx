@@ -1,7 +1,7 @@
 import { types } from "../types/types";
 
 const initialState = {
-  productsShopping: [],
+  productsShopping: JSON.parse(localStorage.getItem('purchase')) || [],
 };
 
 export const shoppingReducer = (state = initialState, action) => {

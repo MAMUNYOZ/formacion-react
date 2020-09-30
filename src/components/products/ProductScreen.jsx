@@ -9,11 +9,12 @@ import {
 import { useParams, Redirect } from "react-router-dom";
 import { getProducstById } from "../selectors/getProductById";
 import { purchaseAddNew, purchaseUpdateTotal } from "../../actions/shopping";
+import { favoritesAddNew } from "../../actions/favorites";
 import { updateProductById } from "../selectors/updateProductById";
 
 import { useDispatch, useSelector } from "react-redux";
 
-export const ProductScreen = ( { history }) => {
+export const ProductScreen = ({ history }) => {
   const { productId } = useParams();
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
@@ -24,22 +25,23 @@ export const ProductScreen = ( { history }) => {
   ]);
 
   const { productsShopping } = useSelector((state) => state.shopping);
+  const { productsFavorites } = useSelector((state) => state.favorites);
 
   if (!product) {
     return <Redirect to="/" />;
   }
 
   const handleReturn = () => {
-    if ( history.length <=2 ) {
-      history.push('/');
+    if (history.length <= 2) {
+      history.push("/");
     } else {
       history.goBack();
     }
-  }
+  };
 
   const { id, name, description, subdescription, price } = product;
 
-  const onSelectProduct = (e) => {
+  /*const onSelectProduct = (e) => {
     const product = e.currentTarget.dataset.product;
 
     const productFind = getProducstById(
@@ -57,6 +59,40 @@ export const ProductScreen = ( { history }) => {
       );
       dispatch(purchaseUpdateTotal(JSON.stringify(productUpdate)));
     }
+  };*/
+
+  const onSelectProduct = (e) => {
+    const product = e.currentTarget.dataset.product;
+    const type = e.currentTarget.dataset.type;
+
+    if (type === "purchase") {
+      const productFind = getProducstById(
+        productsShopping,
+        JSON.parse(product).id
+      );
+      if (!productFind) {
+        dispatch(purchaseAddNew(product));
+        productsShopping.push(JSON.parse(product));
+        localStorage.setItem("purchase", JSON.stringify(productsShopping));
+      } else {
+        const productUpdate = updateProductById(
+          productsShopping,
+          JSON.parse(product).id,
+          1
+        );
+        dispatch(purchaseUpdateTotal(JSON.stringify(productUpdate)));
+      }
+    } else {
+      const productFind = getProducstById(
+        productsFavorites,
+        JSON.parse(product).id
+      );
+      if (!productFind) {
+        dispatch(favoritesAddNew(product));
+        productsFavorites.push(JSON.parse(product));
+        localStorage.setItem("favorites", JSON.stringify(productsFavorites));
+      }
+    }
   };
 
   return (
@@ -64,9 +100,16 @@ export const ProductScreen = ( { history }) => {
       <div className="container pb-5 animate__animated animate__fadeIn">
         <div className="row pt-3">
           <div className="col-12 text-right">
+            <button
+              className="btn btn-outline-info mr-3"
+              onClick={onSelectProduct}
+              data-type="favorites"
+              data-product={JSON.stringify(product)}
+            >
+              Añadir a favoritos
+            </button>
             <button className="btn btn-outline-danger" onClick={handleReturn}>
-              {" "}
-              Volver{" "}
+              Volver
             </button>
           </div>
         </div>
@@ -96,6 +139,7 @@ export const ProductScreen = ( { history }) => {
                   className="btn btn-primary mr-3"
                   onClick={onSelectProduct}
                   data-product={JSON.stringify(product)}
+                  data-type="purchase"
                 >
                   <FontAwesomeIcon icon={faShoppingBasket} className="price" />
                   <span className="price"> Añadir</span>
@@ -137,7 +181,7 @@ export const ProductScreen = ( { history }) => {
                       </div>
                     </div>
                   </div>
-                  <div class="card-footer text-muted">
+                  <div className="card-footer text-muted">
                     <small>*Solo para la península</small>
                   </div>
                 </div>

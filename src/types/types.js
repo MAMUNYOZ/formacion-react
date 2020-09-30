@@ -11,9 +11,9 @@ export const types = {
 
     productsLoaded: '[product] Product loaded',
 
-    purchaseStartAddNew: '[purchase] Start add new product',
     purchaseAddNew: '[purchase] Add new product',
-    purchaseUpdateTotal: 'purchase] Product updated',
+    purchaseUpdateTotal: '[purchase] Product updated',
 
-
+    favoritesAddNew: '[favorites] Add new product',
+    favoritesDelete: '[favorites] Delete product',
 }

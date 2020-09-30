@@ -12,7 +12,7 @@ import "./style.css";
 
 export const RegisterScreen = () => {
   const dispatch = useDispatch();
-  const { msgError } = useSelector((state) => state.ui);
+  const { msgError, classError } = useSelector((state) => state.ui);
 
   const [formValues, handleInputChange] = useForm({
     name: "",
@@ -42,30 +42,30 @@ export const RegisterScreen = () => {
       dispatch( startRegister (name, surnames, email, password, address, postalCode, telephone ) );
     }
   };
-
+// Se pasa a set Error el tipo de error ( 0 si es de login, 1 si es de registro)
   const isFormValid = () => {    
     if (validator.isEmpty(name)) {
-      dispatch(setError("Nombre obligatorio"));
+      dispatch(setError("Nombre obligatorio", 1));
       return false;
     } else if (validator.isEmpty(surnames)) {
-      dispatch(setError("Apellido obligatorio"));
+      dispatch(setError("Apellido obligatorio", 1));
       return false;
     } else if (!validator.isEmail(email)) {
-      dispatch(setError("Email incorrecto"));
+      dispatch(setError("Email incorrecto", 1));
       return false;
     } else if (validator.isEmpty(password) || password.length < 6) {
       dispatch(
-        setError("El tamaño de la clave tiene que ser mayor a 5 caracteres")
+        setError("El tamaño de la clave tiene que ser mayor a 5 caracteres", 1)
       );
       return false;
     } else if (validator.isEmpty(address)) {
-      dispatch(setError("La dirección es obligatoria"));
+      dispatch(setError("La dirección es obligatoria", 1));
       return false;
     } else if (validator.isEmpty(postalCode)) {
-      dispatch(setError("El código postal es obligatorio"));
+      dispatch(setError("El código postal es obligatorio", 1));
       return false;
     } else if (validator.isEmpty(telephone)) {
-      dispatch(setError("El teléfono es obligatorio"));
+      dispatch(setError("El teléfono es obligatorio", 1));
       return false;
     }
 
@@ -85,6 +85,7 @@ export const RegisterScreen = () => {
           <form onSubmit={handleRegister}>
             {
               msgError &&
+              (classError === 1) &&
               (
               <div className="alert alert-danger text-center mt-4" role="alert">
                { msgError }
@@ -161,9 +162,6 @@ export const RegisterScreen = () => {
                   <input
                     type="text"
                     name="telephone"
-                    minLength="10"
-                    maxLength="10"
-                    name="telefono"
                     className="form-control"
                     placeholder="Teléfono *"
                     value={telephone}

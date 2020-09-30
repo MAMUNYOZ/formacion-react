@@ -26,7 +26,7 @@ export const SearcherScreen = ({ history }) => {
   };
 
   return (
-    <div class="contaniner-fluid animate__animated animate__fadeIn">
+    <div className="contaniner-fluid animate__animated animate__fadeIn">
       <div className="container mt-3 mb-5 border-bottom">
         <form onSubmit={handleSearch} className="pb-5">
           <div className="row">

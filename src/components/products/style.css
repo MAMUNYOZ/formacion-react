@@ -1,12 +1,48 @@
 .dark-link {
-    color: #000;
-    font-weight: bold;
+  color: #000;
+  font-weight: bold;
 }
 .price {
-    font-size: 1.5em;
-    font-weight: bold;
+  font-size: 1.5em;
+  font-weight: bold;
 }
-.icons-cards{
-    font-size: 3em;
-    color:#dc3545;
+.icons-cards {
+  font-size: 3em;
+  color: #dc3545;
+}
+.font-1em{
+  font-size:1.1em;
+  cursor: pointer
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .card-columns {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
   }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .card-columns {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+  .card-img {
+    width:50%;
+    height: auto;
+  }
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+    .card-img {
+      width:40%;
+      height: auto;
+    }
+  }
+
+

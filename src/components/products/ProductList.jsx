@@ -3,6 +3,7 @@ import { getProducstByOffer } from "../selectors/getProductsByOffer";
 import { ProductCard } from "./ProductCard";
 
 import { useSelector } from "react-redux";
+import './style.css';
 
 export const ProductList = ({ offer, amount, title }) => {
 
@@ -15,7 +16,7 @@ export const ProductList = ({ offer, amount, title }) => {
       <h2>{title}</h2>
       <div className="card-columns mt-5 mb-5 animate__animated animate__fadeIn">
         {productsList.map((product) => (
-          <ProductCard key={product.id} product={product}/>
+          <ProductCard key={product.id} product={product} page="purchase"/>
         ))}
       </div>
     </div>
