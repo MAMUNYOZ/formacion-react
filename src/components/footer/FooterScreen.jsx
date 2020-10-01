@@ -7,6 +7,12 @@ import {
   faTwitterSquare,
   faInstagramSquare,
 } from "@fortawesome/free-brands-svg-icons";
+import {
+  faHome,
+  faPhone,
+  faEnvelope,
+  faMobileAlt
+} from "@fortawesome/free-solid-svg-icons";
 
 import "./style.css";
 
@@ -39,24 +45,30 @@ export const FooterScreen = () => {
           <div className="col-md-6 text-right">
             <FontAwesomeIcon
               icon={faFacebookSquare}
-              style={{ fontSize: "2em" }}
-              className="pr-2 text-white"
+              className="pr-2 text-white icons"
             />
             <FontAwesomeIcon
               icon={faYoutubeSquare}
-              style={{ fontSize: "2em" }}
-              className="pr-2 text-white"
+              className="pr-2 text-white icons"
             />
             <FontAwesomeIcon
               icon={faTwitterSquare}
-              style={{ fontSize: "2em" }}
-              className="pr-2 text-white"
+              className="pr-2 text-white icons"
             />
             <FontAwesomeIcon
               icon={faInstagramSquare}
-              style={{ fontSize: "2em" }}
-              className="pr-2 text-white"
+              className="pr-2 text-white icons"
             />
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9">
+<p className="text-white"> <FontAwesomeIcon icon={faHome} className="pr-1 text-white"></FontAwesomeIcon>C/ Hermosilla, 21 28003 Madrid | <FontAwesomeIcon icon={faEnvelope} className="pr-1 text-white"></FontAwesomeIcon>tienda@wine.com | <FontAwesomeIcon icon={faPhone} className="pr-1 text-white"></FontAwesomeIcon>91 222 11 00 | <FontAwesomeIcon icon={faMobileAlt} className="pr-1 text-white"></FontAwesomeIcon>696 100 200</p>
+          </div>
+          <div class="col-md-3">
+<p className="text-white"> Aviso Legal | Cookies </p>
           </div>
         </div>
       </div>

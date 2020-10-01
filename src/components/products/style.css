@@ -36,12 +36,24 @@
   .container {
     max-width: 100%;
   }
+  .img-thumbnail{
+    width:40%;
+    height: auto;
+    margin-bottom:25px;
+    border:none;
+  }
 }
 
 @media (max-width: 576px) {
     .card-img {
       width:40%;
       height: auto;
+    }
+    .img-thumbnail{
+      width:50%;
+      height: auto;
+      margin-bottom:25px;
+      border:none
     }
   }
 

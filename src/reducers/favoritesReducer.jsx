@@ -17,6 +17,11 @@ export const favoritesReducer = (state = initialState, action) => {
         ...state,
         productsFavorites: action.payload,
       };
+      case types.favoritesClear:
+        return {
+          ...state,
+          productsFavorites: action.payload,
+        };
 
     default:
       return state;

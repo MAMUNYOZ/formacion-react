@@ -15,3 +15,13 @@
 .icons{
   font-size: 2em;
 }
+.fixed {
+  position:fixed;
+  width: 100%;
+  z-index: 10;
+}
+.opacity{
+  opacity: 0.90;
+  filter:  alpha(opacity=90);
+}
+

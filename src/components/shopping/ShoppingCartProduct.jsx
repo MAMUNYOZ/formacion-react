@@ -1,9 +1,15 @@
 import React from 'react'
 
 import { useDispatch, useSelector } from "react-redux";
-import { purchaseAddNew, purchaseUpdateTotal } from "../../actions/shopping";
-import { getProducstById } from "../selectors/getProductById";
+import { purchaseUpdateTotal } from "../../actions/shopping";
 import { updateProductById } from "../selectors/updateProductById";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPlus,
+  faMinus,
+} from "@fortawesome/free-solid-svg-icons";
+
+import './style.css';
 
 export const ShoppingCartProduct = ({ product }) => {
 
@@ -30,10 +36,10 @@ export const ShoppingCartProduct = ({ product }) => {
     return (
         <li className="list-group-item align-items-center">
             <div className="row">
-              <div className="col-md-1">
+              <div className="col-md-1 text-center">
                 <img
                   src={`./assets/imgs/products/product-${id}.jpg`}
-                  className="w-50"
+                  className="img-thumbnail"
                   alt={name}
                 />
               </div>
@@ -51,18 +57,20 @@ export const ShoppingCartProduct = ({ product }) => {
                 {" "}
                 <h4><button
                     type="button"
-                    className="btn btn-primary mr-3"
+                    className="btn btn-primary mr-3 mt-1"
                     onClick={addOne}
                     data-key={id}
-                    >+</button>  <button
+                    ><FontAwesomeIcon
+                    icon={faPlus}></FontAwesomeIcon></button>  <button
                     type="button"
-                    className="btn btn-primary mr-3"
+                    className="btn btn-primary mr-3 mt-1"
                     onClick={removeOne}
                     data-key={id}
-                    >-</button></h4>
+                    ><FontAwesomeIcon
+                    icon={faMinus}></FontAwesomeIcon></button></h4>
               </div>
               <div className="col-md-2 pt-3 text-right">
-                <h4>
+                <h4 className="text-danger">
                   {(parseFloat(price.replace(",", ".")) *
                     parseInt(total)).toFixed(2)}
                   {" €"}

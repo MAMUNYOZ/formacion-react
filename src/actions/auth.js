@@ -1,6 +1,10 @@
 import { fetchSinToken } from "../helpers/fetch";
 import { types } from "../types/types";
 
+import { favoritesClear } from '../actions/favorites';
+import { purchaseClear } from '../actions/shopping';
+
+
 export const startLogin = (email, password) => {
     return async (dispatch) =>{
       
@@ -56,6 +60,8 @@ export const startLogout = () => {
   return ( dispatch ) =>{
     localStorage.clear();
     dispatch( logout() );
+    dispatch( favoritesClear());
+    dispatch( purchaseClear());
   }
 };
 

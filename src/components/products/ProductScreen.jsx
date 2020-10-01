@@ -5,6 +5,7 @@ import {
   faDollyFlatbed,
   faCoins,
   faGift,
+  faHeart
 } from "@fortawesome/free-solid-svg-icons";
 import { useParams, Redirect } from "react-router-dom";
 import { getProducstById } from "../selectors/getProductById";
@@ -13,6 +14,8 @@ import { favoritesAddNew } from "../../actions/favorites";
 import { updateProductById } from "../selectors/updateProductById";
 
 import { useDispatch, useSelector } from "react-redux";
+
+import './style.css';
 
 export const ProductScreen = ({ history }) => {
   const { productId } = useParams();
@@ -40,26 +43,6 @@ export const ProductScreen = ({ history }) => {
   };
 
   const { id, name, description, subdescription, price } = product;
-
-  /*const onSelectProduct = (e) => {
-    const product = e.currentTarget.dataset.product;
-
-    const productFind = getProducstById(
-      productsShopping,
-      JSON.parse(product).id
-    );
-
-    if (!productFind) {
-      dispatch(purchaseAddNew(product));
-    } else {
-      const productUpdate = updateProductById(
-        productsShopping,
-        JSON.parse(product).id,
-        1
-      );
-      dispatch(purchaseUpdateTotal(JSON.stringify(productUpdate)));
-    }
-  };*/
 
   const onSelectProduct = (e) => {
     const product = e.currentTarget.dataset.product;
@@ -106,7 +89,7 @@ export const ProductScreen = ({ history }) => {
               data-type="favorites"
               data-product={JSON.stringify(product)}
             >
-              Añadir a favoritos
+              <FontAwesomeIcon icon={faHeart} /> Añadir a favoritos
             </button>
             <button className="btn btn-outline-danger" onClick={handleReturn}>
               Volver
@@ -114,7 +97,7 @@ export const ProductScreen = ({ history }) => {
           </div>
         </div>
         <div className="row mt-5">
-          <div className="col-md-3">
+          <div className="col-md-3 text-center">
             <img
               src={`../assets/imgs/products/product-${productId}.jpg`}
               alt={name}

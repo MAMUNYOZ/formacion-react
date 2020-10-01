@@ -5,7 +5,7 @@ import "./style.css";
 export const BannerScreen = () =>{
   return (
     <div className="jumbotron jumbotron-fluid mb-0">
-      <div className="container">
+      <div className="container margin-60">
         <h1 className="display-4">Oferta de bienvenida</h1>
         <p className="lead">
           Consigue 10 € de regalo para probar tus primeros vinos

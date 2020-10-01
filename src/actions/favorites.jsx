@@ -10,3 +10,8 @@ export const favoritesDelete = ( products ) => ({
     payload: products
 });
 
+export const favoritesClear = ( ) => ({
+    type: types.favoritesClear,
+    payload: []
+});
+

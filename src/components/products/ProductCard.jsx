@@ -74,7 +74,7 @@ export const ProductCard = ({ product, page }) => {
   return (
     <div className="card ms-3">
       <div className="row no-gutters">
-        <div className="col-md-4">
+        <div className="col-md-4 text-center">
           <img
             src={`./assets/imgs/products/product-${id}.jpg`}
             className="card-img"

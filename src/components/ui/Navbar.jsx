@@ -6,6 +6,8 @@ import {
   faBars,
   faUserCircle,
   faShoppingBasket,
+  faSearch,
+  faHeart
 } from "@fortawesome/free-solid-svg-icons";
 
 import "./style.css";
@@ -32,7 +34,7 @@ export const Navbar = () => {
   return (
     <>
       <div
-        className={`${isNavCollapsed ? "collapse" : ""} navbar-collapse`}
+        className={`${isNavCollapsed ? "collapse" : ""} navbar-collapse fixed opacity`}
         id="navbarMenu"
       >
         <div className="bg-dark p-4">
@@ -65,7 +67,7 @@ export const Navbar = () => {
                 Productos
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li className="nav-item d-block d-sm-block d-md-none">
               <NavLink
                 className="nav-item nav-link"
                 to="buscar"
@@ -135,7 +137,7 @@ export const Navbar = () => {
           </ul>
         </div>
       </div>
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark sombra">
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark sombra fixed">
         <button
           type="button"
           aria-expanded={!isNavCollapsed ? true : false}
@@ -151,6 +153,11 @@ export const Navbar = () => {
 
         <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
           <ul className="navbar-nav ml-auto">
+            <li className="pr-3">
+              <NavLink className="nav-item nav-link" exact to="/buscar">
+                <FontAwesomeIcon icon={faSearch} className="icons" />{" "}               
+              </NavLink>
+            </li>
             <li className="pr-3">
               <NavLink className="nav-item nav-link" exact to="/compra">
                 <FontAwesomeIcon icon={faShoppingBasket} className="icons" />{" "}

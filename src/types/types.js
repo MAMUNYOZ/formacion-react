@@ -13,7 +13,9 @@ export const types = {
 
     purchaseAddNew: '[purchase] Add new product',
     purchaseUpdateTotal: '[purchase] Product updated',
+    purchaseClear: '[purchase] Clear purchase',
 
     favoritesAddNew: '[favorites] Add new product',
     favoritesDelete: '[favorites] Delete product',
+    favoritesClear: '[favorites] Clear favorites'
 }

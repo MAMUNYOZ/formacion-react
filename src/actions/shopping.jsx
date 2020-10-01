@@ -9,3 +9,7 @@ export const purchaseUpdateTotal = ( product ) => ({
     type: types.purchaseUpdateTotal,
     payload: JSON.parse(product)
 });
+export const purchaseClear = ( ) => ({
+    type: types.purchaseClear,
+    payload: []
+});
