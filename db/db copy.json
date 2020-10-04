@@ -221,6 +221,16 @@
       "total": 1
     }
   ],
-  "users": [],
-  "orders": []
+  "users": [
+    {
+      "name": "MIGUEL ANGEL",
+      "surnames": "MUÑOZ GONZALEZ",
+      "password": "123456",
+      "address": "ALMAGRO 22",
+      "email": "milangito@hotmail.com",
+      "postalCode": "28009",
+      "telephone": "123456780",
+      "id": 1
+    }
+  ]
 }

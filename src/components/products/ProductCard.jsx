@@ -23,37 +23,47 @@ export const ProductCard = ({ product, page }) => {
   const { productsShopping } = useSelector((state) => state.shopping);
   const { productsFavorites } = useSelector((state) => state.favorites);
 
-  const { id, name, subdescription, description, price } = product;
+  const LoadFromShoppingStock = (product) => {
+    // Para actualizar el stock si ya lo tenemos en la cesta de la compra al cargar los productos
+    const productFind = getProducstById(productsShopping, product.id);
+    if (productFind) {
+      productFind.stock = product.stock - productFind.total;
+      product = productFind;
+    }
+
+    return product;
+  };
+
+  // Comprobamos si el producto lo tenenos en el carrito para actualizar el stock
+  product = LoadFromShoppingStock(product);
+
+  const { id, name, subdescription, description, stock, price } = product;
 
   const onSelectProduct = (e) => {
-    const product = e.currentTarget.dataset.product;
+    const product = JSON.parse(e.currentTarget.dataset.product);
+    const { id } = product;
     const type = e.currentTarget.dataset.type;
 
     if (type === "purchase") {
-      const productFind = getProducstById(
-        productsShopping,
-        JSON.parse(product).id
-      );
+      // añadir al carrito de la compra
+      const productFind = getProducstById(productsShopping, id);
       if (!productFind) {
-        dispatch(purchaseAddNew(product));
-        productsShopping.push(JSON.parse(product));
+        // actualizamos el stock
+        product.stock = product.stock - 1;
+
+        dispatch(purchaseAddNew(JSON.stringify(product)));
+        productsShopping.push(product);
         localStorage.setItem("purchase", JSON.stringify(productsShopping));
       } else {
-        const productUpdate = updateProductById(
-          productsShopping,
-          JSON.parse(product).id,
-          1
-        );
+        const productUpdate = updateProductById(productsShopping, id, 1);
         dispatch(purchaseUpdateTotal(JSON.stringify(productUpdate)));
       }
     } else {
-      const productFind = getProducstById(
-        productsFavorites,
-        JSON.parse(product).id
-      );
+      // añadir a favoritos
+      const productFind = getProducstById(productsFavorites, id);
       if (!productFind) {
-        dispatch(favoritesAddNew(product));
-        productsFavorites.push(JSON.parse(product));
+        dispatch(favoritesAddNew(JSON.stringify(product)));
+        productsFavorites.push(product);
         localStorage.setItem("favorites", JSON.stringify(productsFavorites));
       }
     }
@@ -61,24 +71,33 @@ export const ProductCard = ({ product, page }) => {
 
   const onDeleteProduct = (e) => {
     const productId = e.currentTarget.dataset.key;
-    let favoriteStorage = JSON.parse(localStorage.getItem('favorites'));
-    favoriteStorage = favoriteStorage.filter( product => product.id !== productId );
+    let favoriteStorage = JSON.parse(localStorage.getItem("favorites"));
+    favoriteStorage = favoriteStorage.filter(
+      (product) => product.id !== productId
+    );
 
-    console.log(favoriteStorage);
-    
-    localStorage.setItem('favorites', JSON.stringify(favoriteStorage));
+    localStorage.setItem("favorites", JSON.stringify(favoriteStorage));
     dispatch(favoritesDelete(favoriteStorage));
-
   };
 
   return (
     <div className="card ms-3">
+      {stock <= 0 ? (
+        <div className="card-header alert-danger text-center">
+          <strong>Producto no disponible</strong>
+        </div>
+      ) : (
+        <div className="card-header alert-info">
+          <strong>Disponible {stock} unidades</strong>
+        </div>
+      )}
+
       <div className="row no-gutters">
         <div className="col-md-4 text-center">
           <img
             src={`./assets/imgs/products/product-${id}.jpg`}
             className="card-img"
-            alt={product.name}
+            alt={name}
           />
         </div>
         <div className="col-md-8 text-left">
@@ -104,16 +123,20 @@ export const ProductCard = ({ product, page }) => {
             <h5 className="text-left"> {price} €</h5>
           </div>
           <div className="col-md-7 col-sm-8 text-right">
-            <button
-              type="button"
-              className="btn btn-primary mr-3"
-              onClick={onSelectProduct}
-              data-product={JSON.stringify(product)}
-              data-type="purchase"
-            >
-              <FontAwesomeIcon icon={faShoppingBasket} className="font-1em" />{" "}
-              Añadir
-            </button>
+            {stock > 0 ? (
+              <button
+                type="button"
+                className="btn btn-primary mr-3"
+                onClick={onSelectProduct}
+                data-product={JSON.stringify(product)}
+                data-type="purchase"
+              >
+                <FontAwesomeIcon icon={faShoppingBasket} className="font-1em" />{" "}
+                Añadir
+              </button>
+            ) : (
+              <span className="badge badge-danger mr-2">No disponible</span>
+            )}
             {page === "favorites" ? (
               <FontAwesomeIcon
                 icon={faTrashAlt}

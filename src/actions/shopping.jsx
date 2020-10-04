@@ -13,3 +13,11 @@ export const purchaseClear = ( ) => ({
     type: types.purchaseClear,
     payload: []
 });
+export const orderAddNew = ( shopping ) => ({
+    type: types.orderAddNew,
+    payload: JSON.parse( shopping )
+});
+export const orderFinish = ( ) => ({
+    type: types.orderAddNew,
+    payload: []
+});

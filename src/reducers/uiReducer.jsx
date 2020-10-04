@@ -12,11 +12,13 @@ export const uiReducer = (state = initialState, action) => {
       return {
         ...state,
         msgError: action.payload,
+        loading:true,
         classError: action.kind
       }
     case types.uiRemoveError:
       return {
         ...state,
+        loading:false,
         msgError: null
       }
 

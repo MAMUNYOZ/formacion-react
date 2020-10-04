@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import { uiReducer } from './uireducer';
 
 
-export const roorTeducer = combineReducers({
+export const rootReducer = combineReducers({
     ui: uiReducer,
     auth: authReducer
 })

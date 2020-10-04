@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { ProductCard } from "../products/ProductCard";
 
 import { useSelector } from "react-redux";

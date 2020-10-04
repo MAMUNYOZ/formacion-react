@@ -16,7 +16,7 @@ export const ShoppingCartProduct = ({ product }) => {
     const dispatch = useDispatch();
     const { productsShopping } = useSelector((state) => state.shopping);
 
-    const {id, name, price, total} = product;
+    const {id, name, price, stock, total} = product;
 
     const addOne = (e) => {
         const productId = e.currentTarget.dataset.key;    
@@ -45,6 +45,9 @@ export const ShoppingCartProduct = ({ product }) => {
               </div>
               <div className="col-md-4 pt-3">
                 <h4>{name}</h4>
+    <span className={`${stock > 0 ? "badge-success" : "badge-danger"} badge`}>{ stock === 0 ? (
+      "No disponemos de más unidades"
+    ) : ( stock < 0 ? ( `Solo disponemos de ${total + stock} unidades`) : (`${stock} Unidades existentes` ))} </span>
               </div>
 
               <div className="col-md-1 pt-3 text-center">
@@ -77,6 +80,9 @@ export const ShoppingCartProduct = ({ product }) => {
                 </h4>
               </div>
             </div>
+            {
+
+            }
           </li>
     )
 }

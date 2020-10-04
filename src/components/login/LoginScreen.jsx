@@ -12,8 +12,8 @@ export const LoginScreen = ({ history }) => {
   const { msgError, classError } = useSelector((state) => state.ui);
 
   const [formValues, handleInputChange] = useForm({
-    email: "uno@dos.es",
-    password: "123456",
+    email: "",
+    password: "",
   });
 
   const { email, password } = formValues;
@@ -22,10 +22,9 @@ export const LoginScreen = ({ history }) => {
     e.preventDefault();
     if (isFormValid()) {
       dispatch( startLogin(email, password) );
-      history.replace('/');
     }
   };
-// Se pasa a serError el tipo de error ( 0 si es de login, 1 si es de registro)
+// Se pasa a serError el tipo de error ( 0 si es de login, 1 si es de registro, 2 si es de actualización de datos)
   const isFormValid = () => {
     if (
       !validator.isEmail(email) ||

@@ -15,7 +15,14 @@ export const types = {
     purchaseUpdateTotal: '[purchase] Product updated',
     purchaseClear: '[purchase] Clear purchase',
 
+    orderAddNew: '[order] Add new order',
+    orderClear: '[order] Finish order',
+    historicalLoaded: '[order] Historical orders loaded',
+
     favoritesAddNew: '[favorites] Add new product',
     favoritesDelete: '[favorites] Delete product',
-    favoritesClear: '[favorites] Clear favorites'
+    favoritesClear: '[favorites] Clear favorites',
+
+    userLoaded: '[users] User loaded',
+    userUpdated: '[users] User updaed',
 }

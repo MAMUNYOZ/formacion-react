@@ -8,9 +8,9 @@ export const BannerScreen = () =>{
       <div className="container margin-60">
         <h1 className="display-4">Oferta de bienvenida</h1>
         <p className="lead">
-          Consigue 10 € de regalo para probar tus primeros vinos
+          Consigue un sacacorchos exclusivo gratis por una compra superior a 80 €
         </p>
-        <Link className="btn btn-danger btn-lg" to="/registrarse"> Conseguir </Link>
+       
       </div>
     </div>
   );

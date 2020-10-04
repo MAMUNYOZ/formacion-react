@@ -39,10 +39,10 @@ export const RegisterScreen = () => {
     dispatch(removeError());
 
     if (isFormValid()) {
-      dispatch( startRegister (name, surnames, email, password, address, postalCode, telephone ) );
+      dispatch( startRegister (name.toUpperCase(), surnames.toUpperCase(), email, password, address, postalCode, telephone ) );
     }
   };
-// Se pasa a set Error el tipo de error ( 0 si es de login, 1 si es de registro)
+// Se pasa a set Error el tipo de error ( 0 si es de login, 1 si es de registro, 2 de actualización de datos)
   const isFormValid = () => {    
     if (validator.isEmpty(name)) {
       dispatch(setError("Nombre obligatorio", 1));

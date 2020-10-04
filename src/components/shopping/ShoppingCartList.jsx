@@ -1,10 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { ShoppingCartProduct } from "./ShoppingCartProduct";
+import { orderFinish } from "../../actions/order";
+import { purchaseClear } from "../../actions/shopping";
+
 
 export const ShoppingCartList = ({ title }) => {
+  const dispatch = useDispatch();
   const { productsShopping } = useSelector((state) => state.shopping);
+
+  const { loaded, recived } = useSelector((state) => state.orders)
 
   let total = 0;
   productsShopping.map(function (product) {
@@ -13,10 +19,16 @@ export const ShoppingCartList = ({ title }) => {
       parseFloat(product.price.replace(",", ".")) * parseInt(product.total);
   });
 
+  const handleFinishBuying = () => {
+
+    dispatch( orderFinish( localStorage.getItem('uid'), total.toFixed(2), productsShopping, "pendiente" ) );
+    dispatch(purchaseClear());
+  };
+
   return (
     <div className="container pb-4 animate__animated animate__fadeIn">
       <h2 className="text-center">{title}</h2>
-      {productsShopping.length ? (
+      {productsShopping.length && !recived ? (
         <>
           <h3 className="pt-5">Estos son los productos que has comprado:</h3>
           <ul className="list-group pt-4">
@@ -34,7 +46,7 @@ export const ShoppingCartList = ({ title }) => {
           </div>
           <div className="row mt-5">
             <div className="col-12 text-right">
-                  <button className="btn btn-danger btn-lg"> Terminar compra </button>
+                  <button className="btn btn-danger btn-lg" onClick={handleFinishBuying}> Terminar compra </button>
             </div>
           </div>
         </>

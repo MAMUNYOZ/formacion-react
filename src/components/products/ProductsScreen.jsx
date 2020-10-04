@@ -3,6 +3,6 @@ import { ProductList } from './ProductList'
 
 export const ProductsScreen = () => {
     return (
-            <ProductList title='Nuestros Productos'/>
+            <ProductList title='Nuestros Productos' icon='faStar'/>
     )
 }

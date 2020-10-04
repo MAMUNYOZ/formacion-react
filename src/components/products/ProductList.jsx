@@ -5,7 +5,7 @@ import { ProductCard } from "./ProductCard";
 import { useSelector } from "react-redux";
 import './style.css';
 
-export const ProductList = ({ offer, amount, title }) => {
+export const ProductList = ({ offer, amount, title, icon }) => {
 
   const { products } = useSelector((state) => state.products);
 

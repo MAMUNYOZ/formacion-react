@@ -4,8 +4,12 @@ import { uiReducer } from "../reducers/uiReducer";
 import { productsReducer } from "../reducers/productsReducer";
 import { shoppingReducer } from "../reducers/shoppingReducer";
 import { favoritesReducer } from "../reducers/favoritesReducer";
+import { userReducer } from "../reducers/userReducer";
+import { orderReducer } from "../reducers/orderRecducer";
 
 import thunk from 'redux-thunk';
+
+
 
 
 
@@ -16,7 +20,9 @@ const reducers = combineReducers({
   ui: uiReducer,
   products: productsReducer,
   shopping: shoppingReducer,
-  favorites: favoritesReducer
+  favorites: favoritesReducer,
+  user: userReducer,
+  orders: orderReducer
 });
 
 export const store = createStore(

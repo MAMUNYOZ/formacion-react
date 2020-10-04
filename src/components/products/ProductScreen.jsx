@@ -22,7 +22,7 @@ export const ProductScreen = ({ history }) => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
 
-  const product = useMemo(() => getProducstById(products, productId), [
+  let product = useMemo(() => getProducstById(products, productId), [
     products,
     productId,
   ]);
@@ -42,7 +42,21 @@ export const ProductScreen = ({ history }) => {
     }
   };
 
-  const { id, name, description, subdescription, price } = product;
+
+  const LoadFromShoppingStock = (product) => {
+    // Para actualizar el stock si ya lo tenemos en la cesta de la compra al cargar los productos
+    const productFind = getProducstById(productsShopping, product.id);
+    if (productFind) {
+      product = productFind;
+    }
+
+    return product;
+  };
+
+    // Comprobamos si el producto lo tenenos en el carrito para actualizar el stock
+    product = LoadFromShoppingStock(product);
+
+  const { id, name, description, subdescription, stock, price } = product;
 
   const onSelectProduct = (e) => {
     const product = e.currentTarget.dataset.product;
@@ -117,6 +131,7 @@ export const ProductScreen = ({ history }) => {
                 <p className=" price">Precio: {price} €</p>
               </div>
               <div className="col-md-6 text-center">
+              {stock > 0 ? ( 
                 <button
                   type="button"
                   className="btn btn-primary mr-3"
@@ -127,6 +142,9 @@ export const ProductScreen = ({ history }) => {
                   <FontAwesomeIcon icon={faShoppingBasket} className="price" />
                   <span className="price"> Añadir</span>
                 </button>
+                 ) : (
+                  <span class="badge badge-danger mr-2 font-1con5em">No disponible</span>
+                )}
               </div>
             </div>
             <div className="row mt-5">

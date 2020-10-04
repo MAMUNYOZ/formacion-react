@@ -52,7 +52,7 @@ export const Navbar = () => {
             <li className="nav-item">
               <NavLink
                 className="nav-item nav-link"
-                to="ofertas"
+                to="/ofertas"
                 onClick={handleNavCollapse}
               >
                 Ofertas
@@ -61,7 +61,7 @@ export const Navbar = () => {
             <li className="nav-item">
               <NavLink
                 className="nav-item nav-link"
-                to="productos"
+                to="/productos"
                 onClick={handleNavCollapse}
               >
                 Productos
@@ -70,7 +70,7 @@ export const Navbar = () => {
             <li className="nav-item d-block d-sm-block d-md-none">
               <NavLink
                 className="nav-item nav-link"
-                to="buscar"
+                to="/buscar"
                 onClick={handleNavCollapse}
               >
                 Buscar producto
@@ -79,7 +79,7 @@ export const Navbar = () => {
             <li className="nav-item">
               <NavLink
                 className="nav-item nav-link"
-                to="favoritos"
+                to="/favoritos"
                 onClick={handleNavCollapse}
               >
                 Favoritos
@@ -88,7 +88,7 @@ export const Navbar = () => {
             <li className="nav-item">
               <NavLink
                 className="nav-item nav-link"
-                to="compra"
+                to="/compra"
                 onClick={handleNavCollapse}
               >
                 Compra
@@ -99,7 +99,7 @@ export const Navbar = () => {
                 <NavLink
                   className="nav-item nav-link"
                   exact
-                  to="#"
+                  to="/usuario"
                   onClick={handleNavCollapse}
                 >
                   {name} <span className="text-white">/</span>{" "}
@@ -167,7 +167,7 @@ export const Navbar = () => {
             {name ? (
               <li className="pt-2 d-none d-sm-none d-md-block">
                 <FontAwesomeIcon className="icons" icon={faUserCircle} />{" "}
-                <NavLink className="nav-item nav-link" exact to="#">
+                <NavLink className="nav-item nav-link" exact to="/usuario">
                   {name} <span className="text-white">/</span>{" "}
                 </NavLink>
                 <NavLink
